@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.dotfiles/oh-my-zsh
+#export TERM="xterm-256color"
 # if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
 # POWERLEVEL9K_MODE='awesome-patched'
 export ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -17,6 +18,7 @@ POWERLEVEL9K_SHOW_CHANGESET=true
 
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="true"
+export TERM="xterm-256color"
 
 # disable weekly auto-update checks
 # export DISABLE_AUTO_UPDATE="true"
@@ -53,3 +55,9 @@ unsetopt correct
 
 # run fortune on new terminal :)
 fortune
+
+export PATH=~/.composer/vendor/bin:$PATH
+export PATH=/Users/mmourani/code/PROJECTS/AXIR/hyperledger/fabric-samples/bin:$PATH
+
+
+
