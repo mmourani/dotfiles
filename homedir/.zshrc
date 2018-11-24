@@ -59,5 +59,7 @@ fortune
 export PATH=~/.composer/vendor/bin:$PATH
 export PATH=/Users/mmourani/code/PROJECTS/AXIR/hyperledger/fabric-samples/bin:$PATH
 
+ulimit -n 200000
+ulimit -u 2048
 
 
