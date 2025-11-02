@@ -1,11 +1,8 @@
-#My Scripts
-export PATH=$PATH:.
-#export PATH=$PATH:~/.dotfiles/scripts
+# Note: Most PATH configuration is now in .zshrc
+# This file is kept for backwards compatibility but minimized
 
-#Brew
-export PATH="/opt/homebrew/bin:$PATH"
-# export PATH=/usr/local/sbin:$PATH
-# export PATH=/usr/local/bin:$PATH
+# Custom scripts (if needed in future)
+# export PATH=$PATH:~/.dotfiles/scripts
 
 # GO
 #export PATH=$PATH:/usr/local/opt/go/libexec/bin

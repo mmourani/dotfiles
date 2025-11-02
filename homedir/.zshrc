@@ -1,58 +1,112 @@
-# Path to your oh-my-zsh configuration.
+### 🧠 Core Path Add Helper
+path_add() { [ -d "$1" ] && PATH="$1:$PATH"; }
+
+### 📄 Document Foundry Global Access
+alias foundry-mcp="node /Users/user/Sites/document-foundry/mcp-server/dist/server.js"
+
+# Path to your oh-my-zsh configuration
 export ZSH=$HOME/.dotfiles/oh-my-zsh
-# if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
-# POWERLEVEL9K_MODE='awesome-patched'
-export ZSH_THEME="powerlevel9k/powerlevel9k"
-# export ZSH_THEME="agnoster"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-# https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
-# https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir nvm vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
-# colorcode test
-# for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"
-POWERLEVEL9K_NVM_FOREGROUND='000'
-POWERLEVEL9K_NVM_BACKGROUND='072'
-POWERLEVEL9K_SHOW_CHANGESET=true
-#export ZSH_THEME="random"
+# Using Oh My Posh instead of a ZSH theme
+export ZSH_THEME=""
 
-# Set to this to use case-sensitive completion
-export CASE_SENSITIVE="true"
+# Plugins
+plugins=(
+  colorize compleat dirpersist autojump git gulp history cp
+  zsh-autosuggestions zsh-syntax-highlighting docker npm
+  composer colored-man-pages extract sudo brew kubectl
+)
 
-# disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
-
-# disable colors in ls
-# export DISABLE_LS_COLORS="true"
-
-# disable autosetting terminal title.
-export DISABLE_AUTO_TITLE="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(colorize compleat dirpersist autojump git gulp history cp)
-
+# Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# Git and completion enhancements
 autoload -U add-zsh-hook
+autoload -Uz compinit && compinit
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':completion:*:*:git:*' script /usr/local/share/zsh/site-functions/_git
 
+# NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-
+# Auto-load .nvmrc silently (no output at startup)
 load-nvmrc() {
   if [[ -f .nvmrc && -r .nvmrc ]]; then
     nvm use &> /dev/null
-  else
-    nvm use stable
   fi
 }
 add-zsh-hook chpwd load-nvmrc
-load-nvmrc
 
-# Customize to your needs...
+# Disable corrections
 unsetopt correct
 
-# run fortune on new terminal :)
-fortune
+# Aliases
+alias ls='lsd --icon always --group-dirs first'
+alias ll='lsd -l --icon always --group-dirs first'
+alias la='lsd -la --icon always --group-dirs first'
+
+# General PATH setup
+export PATH="/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.composer/pestphp/pest:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export PATH="/opt/homebrew/opt/mongodb-community@5.0/bin:$PATH"
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="/opt/homebrew/opt/tcl-tk/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.12/bin:$PATH"
+export PATH="/Users/user/.codeium/windsurf/bin:$PATH"
+export PATH="/Users/user/.lmstudio/bin:$PATH"
+
+# Java & Compiler flags
+export CPPFLAGS="-I/opt/homebrew/opt/tcl-tk/include"
+export LDFLAGS="-L/opt/homebrew/opt/tcl-tk/lib"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/tcl-tk/lib/pkgconfig"
+
+# GitHub Copilot CLI
+eval "$(gh copilot alias -- zsh)"
+
+# Enable colored output
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# pyenv initialization
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+# Angular CLI autocompletion (only if installed)
+command -v ng &>/dev/null && source <(ng completion script)
+
+# Editor
+export EDITOR="code --wait"
+
+# Claude AI Fallback System
+export CLAUDE_AI_FALLBACK="$HOME/.claude-ai-fallback"
+
+# Function to use when Claude is rate limited
+when_claude_limited() {
+    echo "🔄 Claude is rate limited, switching to fallback AI..."
+    python3 "$HOME/.claude-ai-fallback/multi_ai_cli.py" "$@"
+}
+
+# Alias for quick access
+alias ai='python3 "$HOME/.claude-ai-fallback/multi_ai_cli.py"'
+alias ai-status='python3 "$HOME/.claude-ai-fallback/multi_ai_cli.py" status'
+alias claude-fallback='when_claude_limited'
+
+### 🎨 Oh My Posh Prompt Setup (active)
+if command -v oh-my-posh &>/dev/null; then
+  eval "$(oh-my-posh init zsh --config ~/.poshthemes/pararussel.omp.json)"
+fi
+
+# Show a random fortune only in interactive terminals (if fortune is installed)
+if [[ $- == *i* ]] && command -v fortune &>/dev/null; then
+  fortune
+fi
+export PATH="/opt/homebrew/opt/mysql/bin:$PATH"
+source ~/.shellaliases
