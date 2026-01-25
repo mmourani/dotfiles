@@ -67,7 +67,10 @@ export LDFLAGS="-L/opt/homebrew/opt/tcl-tk/lib"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/tcl-tk/lib/pkgconfig"
 
 # GitHub Copilot CLI
-eval "$(gh copilot alias -- zsh)"
+# GitHub Copilot CLI (with error handling)
+if command -v gh &>/dev/null && gh extension list 2>/dev/null | grep -q copilot; then
+  eval "$(gh copilot alias -- zsh 2>/dev/null || true)"
+fi
 
 # Enable colored output
 export CLICOLOR=1
