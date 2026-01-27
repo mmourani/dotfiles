@@ -113,3 +113,10 @@ if [[ $- == *i* ]] && command -v fortune &>/dev/null; then
 fi
 export PATH="/opt/homebrew/opt/mysql/bin:$PATH"
 source ~/.shellaliases
+
+# Herd injected PHP binary.
+export PATH="/Users/user/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/config/php/82/"

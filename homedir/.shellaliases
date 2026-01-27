@@ -66,6 +66,20 @@ alias reload='source ~/.zshrc'
 alias hosts='sudo nano /etc/hosts'
 alias path='echo $PATH | tr ":" "\n"'
 
+# === macOS Finder ===
+alias showhidden='defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder'
+alias hidehidden='defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder'
+alias togglehidden='~/.config/scripts/toggle-hidden-files.sh'
+
+# === iTerm2 ===
+alias iterm-reload='defaults read com.apple.finder'
+alias iterm-setup='~/.config/iterm2/setup-iterm2-claude.sh'
+
+# === Claude CLI ===
+alias c='claude'
+alias ccode='claude code'
+alias cchat='claude chat'
+
 # ✅ Safe MySQL Access — remove or adjust if alias conflict
 # Do not force bind to 127.0.0.1 unless needed
 # alias mysql='mysql -u root -p'
