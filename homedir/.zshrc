@@ -128,3 +128,39 @@ export HERD_PHP_85_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/co
 
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/config/php/84/"
+
+# Claude CLI with memory (repo-aware)
+claude_repo_root() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -d "$dir/.git" ]]; then
+      echo "$dir"
+      return 0
+    fi
+    dir=$(dirname "$dir")
+  done
+  echo "/Users/user/Sites/microservices/trading-signals"  # fallback
+  return 1
+}
+
+claude_mem() {
+  local repo_root=$(claude_repo_root)
+  if [[ -f "$repo_root/scripts/claude_with_recall.sh" ]]; then
+    bash "$repo_root/scripts/claude_with_recall.sh" "$@"
+  else
+    echo "ERROR: Memory stack not found in current repo ($repo_root)"
+    echo "Fallback: Using trading-signals memory stack"
+    bash /Users/user/Sites/microservices/trading-signals/scripts/claude_with_recall.sh "$@"
+  fi
+}
+
+claude_mem_dry() {
+  local repo_root=$(claude_repo_root)
+  if [[ -f "$repo_root/scripts/claude_with_recall.sh" ]]; then
+    bash "$repo_root/scripts/claude_with_recall.sh" --dry-run "$@"
+  else
+    echo "ERROR: Memory stack not found in current repo ($repo_root)"
+    echo "Fallback: Using trading-signals memory stack"
+    bash /Users/user/Sites/microservices/trading-signals/scripts/claude_with_recall.sh --dry-run "$@"
+  fi
+}
