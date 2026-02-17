@@ -164,3 +164,5 @@ claude_mem_dry() {
     bash /Users/user/Sites/microservices/trading-signals/scripts/claude_with_recall.sh --dry-run "$@"
   fi
 }
+alias reset-ci-db="bash scripts/reset_phpunit_db.sh"
+alias gate-ci='CI=true DISABLE_LIVE_NETWORK_TESTS=1 bash -c "vendor/bin/pest --configuration=phpunit.ci.xml --compact 2>&1 | tee /tmp/pest_ci.txt >/dev/null; echo EXIT=\${PIPESTATUS[0]}; tail -5 /tmp/pest_ci.txt"'
