@@ -14,7 +14,7 @@ alias tinker='php artisan tinker'
 alias migrate='php artisan migrate'
 alias seed='php artisan db:seed'
 alias fresh='php artisan migrate:fresh --seed'
-alias test='php artisan test'
+alias ttest='php artisan test'
 alias cc='php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear'
 
 # === Git Shortcuts ===

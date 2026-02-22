@@ -1,6 +1,9 @@
 ### 🧠 Core Path Add Helper
 path_add() { [ -d "$1" ] && PATH="$1:$PATH"; }
 
+### 🔧 Unalias test to prevent shell builtin hijacking
+unalias test 2>/dev/null
+
 ### 📄 Document Foundry Global Access
 alias foundry-mcp="node /Users/user/Sites/document-foundry/mcp-server/dist/server.js"
 
