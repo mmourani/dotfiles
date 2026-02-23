@@ -83,3 +83,7 @@ alias cchat='claude chat'
 # ✅ Safe MySQL Access — remove or adjust if alias conflict
 # Do not force bind to 127.0.0.1 unless needed
 # alias mysql='mysql -u root -p'
+
+# === Trading Signals Ops ===
+alias opsr='cd /Users/user/Sites/microservices/trading-signals && php artisan trading:ops:report'
+alias opsj='cd /Users/user/Sites/microservices/trading-signals && php artisan trading:ops:report --json'
