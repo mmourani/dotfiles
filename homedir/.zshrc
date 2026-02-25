@@ -169,3 +169,8 @@ claude_mem_dry() {
 }
 alias reset-ci-db="bash scripts/reset_phpunit_db.sh"
 alias gate-ci='CI=true DISABLE_LIVE_NETWORK_TESTS=1 bash -c "vendor/bin/pest --configuration=phpunit.ci.xml --compact 2>&1 | tee /tmp/pest_ci.txt >/dev/null; echo EXIT=\${PIPESTATUS[0]}; tail -5 /tmp/pest_ci.txt"'
+
+# HubTrade SaaS Boilerplate shortcuts
+alias cproj='cd /Users/user/Sites/saas-boilerplate'
+alias cback='cd /Users/user/Sites/saas-boilerplate/backend'
+alias cfront='cd /Users/user/Sites/saas-boilerplate/frontends/hubtrade'
