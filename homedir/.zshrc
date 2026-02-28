@@ -174,3 +174,17 @@ alias gate-ci='CI=true DISABLE_LIVE_NETWORK_TESTS=1 bash -c "vendor/bin/pest --c
 alias cproj='cd /Users/user/Sites/saas-boilerplate'
 alias cback='cd /Users/user/Sites/saas-boilerplate/backend'
 alias cfront='cd /Users/user/Sites/saas-boilerplate/frontends/hubtrade'
+
+# saas-boilerplate: guard against accidental gh pr merge --admin
+# To override for a production incident, set:
+#   ALLOW_ADMIN_MERGE=1 ALLOW_ADMIN_MERGE_REASON="reason" gh pr merge <num> --admin
+function gh() {
+    local REPO_ROOT
+    REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo '')"
+    local GUARD="$REPO_ROOT/.githooks/gh-merge-guard.sh"
+    if [ -x "$GUARD" ]; then
+        "$GUARD" "$@"
+    else
+        command gh "$@"
+    fi
+}
