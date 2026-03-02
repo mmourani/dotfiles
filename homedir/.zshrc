@@ -188,3 +188,6 @@ function gh() {
         command gh "$@"
     fi
 }
+
+# Playwright — stable browser cache across all sessions
+export PLAYWRIGHT_BROWSERS_PATH="$HOME/.cache/ms-playwright"
