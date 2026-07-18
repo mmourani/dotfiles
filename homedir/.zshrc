@@ -195,3 +195,6 @@ export PLAYWRIGHT_BROWSERS_PATH="$HOME/.cache/ms-playwright"
 
 # Herd injected PHP 8.3 configuration.
 export HERD_PHP_83_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/config/php/83/"
+
+# kimi-code
+export PATH="/Users/user/.kimi-code/bin:$PATH"
