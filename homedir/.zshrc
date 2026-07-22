@@ -198,3 +198,6 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/co
 
 # kimi-code
 export PATH="/Users/user/.kimi-code/bin:$PATH"
+
+# kimi-worker: allow Kimi delegation in ~/Sites and ~/Desktop (colon-separated; / and $HOME refused by wrapper)
+export KIMI_WORKER_ALLOWED_ROOTS="$HOME/Sites:$HOME/Desktop"
