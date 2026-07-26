@@ -199,5 +199,8 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/co
 # kimi-code
 export PATH="/Users/user/.kimi-code/bin:$PATH"
 
-# kimi-worker: allow Kimi delegation in ~/Sites and ~/Desktop (colon-separated; / and $HOME refused by wrapper)
-export KIMI_WORKER_ALLOWED_ROOTS="$HOME/Sites:$HOME/Desktop"
+# kimi-worker: allowed delegation roots (colon-separated; / and $HOME are refused by the wrapper by design).
+# Operator-approved 2026-07-26, paths named explicitly in chat: added ts-trackB-research (Path 1 capture +
+# Path 2 traders + P3 design), ts-m2-snapshots (R3.5 window), and C4-Systems-Opportunities. Desktop was
+# already present and is retained.
+export KIMI_WORKER_ALLOWED_ROOTS="$HOME/Sites:$HOME/Desktop:$HOME/ts-trackB-research:$HOME/ts-m2-snapshots:$HOME/C4-Systems-Opportunities"
