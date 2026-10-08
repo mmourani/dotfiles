@@ -204,3 +204,7 @@ export PATH="/Users/user/.kimi-code/bin:$PATH"
 # Path 2 traders + P3 design), ts-m2-snapshots (R3.5 window), and C4-Systems-Opportunities. Desktop was
 # already present and is retained.
 export KIMI_WORKER_ALLOWED_ROOTS="$HOME/Sites:$HOME/Desktop:$HOME/ts-trackB-research:$HOME/ts-m2-snapshots:$HOME/C4-Systems-Opportunities"
+
+
+# Herd injected PHP 8.6 configuration.
+export HERD_PHP_86_INI_SCAN_DIR="/Users/user/Library/Application Support/Herd/config/php/86"
